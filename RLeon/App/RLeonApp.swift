@@ -56,12 +56,9 @@ private struct MenuBarPopover: View {
 
     private var phaseDescription: String {
         switch fn.phase {
-        case .idle:
-            return "Short FN tap → dictation-only mode; hold longer → OCR + local LLM."
-        case .recording:
-            return "Listening…"
-        case .sending:
-            return "Processing…"
+        case .idle:      return "Short FN tap \u2192 dictation-only; hold \u2192 OCR + LLM."
+        case .recording: return "Listening\u2026"
+        case .sending:   return "Processing\u2026"
         }
     }
 }
@@ -76,12 +73,10 @@ struct RLeonApp: App {
                 .environmentObject(appState.speech)
                 .environmentObject(appState.fnCoordinator)
                 .environmentObject(appState.toolSelection)
+                .environmentObject(appState.settings)
                 .tint(RLeonTheme.accent)
                 .onAppear {
-                    UserDefaults.standard.register(defaults: [
-                        ToolSafetySettings.askBeforeEachTerminalCommandKey: true,
-                        ToolSafetySettings.askBeforeEachTypeIntoFocusedFieldKey: true,
-                    ])
+                    // UserDefaults.register is now handled inside AppSettings.init()
                     FocusedTextInsertion.requestAccessibilityPromptIfNeeded()
                     appState.fnCoordinator.startMonitoring()
                 }
