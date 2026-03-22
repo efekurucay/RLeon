@@ -1,9 +1,9 @@
 import Foundation
 
-/// Yerel Ollama araçları: sıra, açık/kapalı, kullanıcı metinleri (`UserDefaults` JSON).
+/// Local Ollama tools: order, on/off, user-facing copy (persisted as JSON in `UserDefaults`).
 enum LocalToolStore {
     static let registryKey = "rleonToolRegistryJSON"
-    /// Eski sürüm — tek seferlik göç için.
+    /// Legacy key — one-time migration from CSV.
     static let legacyEnabledCsvKey = "rleonEnabledToolIdsCSV"
 
     static let allToolIds: [String] = [
@@ -65,7 +65,7 @@ enum LocalToolStore {
         return ToolRegistryState(orderedIds: ordered, profiles: profiles)
     }
 
-    /// Modele gidecek açık araç kimlikleri.
+    /// Enabled tool IDs exposed to the model.
     static func loadEnabled() -> Set<String> {
         let r = loadRegistry()
         return Set(r.orderedIds.filter { id in
@@ -95,7 +95,7 @@ enum LocalToolStore {
         return def()
     }
 
-    /// Ollama `function.description` — özelleştirme yoksa `defaultDescription` kullanılır.
+    /// Ollama `function.description`; falls back to `defaultDescription` when not customized.
     static func effectiveModelDescription(for id: String, default defaultDescription: String) -> String {
         if let d = profile(for: id)?.customDescription?.trimmingCharacters(in: .whitespacesAndNewlines), !d.isEmpty {
             return d
@@ -103,7 +103,7 @@ enum LocalToolStore {
         return defaultDescription
     }
 
-    /// Ayarlar önizlemesi ve `OllamaToolCalling` için tek kaynak varsayılan metin.
+    /// Single source of default model-facing strings for Settings previews and `OllamaToolCalling`.
     static func referenceModelDescription(for id: String) -> String {
         switch id {
         case "copy_to_clipboard":

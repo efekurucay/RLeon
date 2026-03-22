@@ -6,7 +6,7 @@ import Foundation
 enum OllamaToolCalling {
     private static let maxRounds = 8
 
-    /// Tanımlar (JSON) — yerleşik araçlar `LocalToolStore` ile; `mcp_*` araçları `MCPToolBridge` ile.
+    /// Tool definitions (JSON): built-ins from `LocalToolStore`; `mcp_*` tools from `MCPToolBridge`.
     static func localToolDefinitionsJSON() -> [[String: Any]] {
         let enabled = LocalToolStore.loadEnabled()
         let combined = allToolDefinitionsUnfiltered() + MCPToolBridge.shared.openAIToolDefinitions()
@@ -163,7 +163,7 @@ enum OllamaToolCalling {
         ]
     }
 
-    /// Tek girişli sohbet + gerekirse çok tur araç döngüsü; son metin cevabı döner.
+    /// Single-turn chat with a multi-round tool loop when needed; returns the final assistant text.
     static func chatWithLocalTools(
         baseURL: URL,
         model: String,
@@ -212,7 +212,7 @@ enum OllamaToolCalling {
                     guard let fn = tc["function"] as? [String: Any],
                           let name = fn["name"] as? String
                     else { continue }
-                    // Ollama çoğu sürümde `arguments` nesne döner; bazıları string. İkisini de kabul et.
+                    // Ollama often returns `arguments` as an object; some builds use a string — accept both.
                     guard let argsStr = jsonStringFromToolArguments(fn["arguments"]) else { continue }
                     let result = try await executeLocalTool(name: name, argumentsJSON: argsStr)
                     var toolMsg: [String: Any] = [
@@ -235,7 +235,7 @@ enum OllamaToolCalling {
         throw OllamaClient.OllamaError(message: "Tool round limit (\(maxRounds)) exceeded.")
     }
 
-    /// Ollama `/api/chat` yanıtında `function.arguments` string veya JSON nesnesi olabilir.
+    /// In `/api/chat` responses, `function.arguments` may be a string or a JSON object.
     private static func jsonStringFromToolArguments(_ value: Any?) -> String? {
         if let s = value as? String { return s }
         guard let obj = value else { return nil }
@@ -253,7 +253,7 @@ enum OllamaToolCalling {
         }
     }
 
-    /// `do script "..."` içinde kullanılacak metin için kaçış.
+    /// Escape a string for use inside AppleScript `do script "..."`.
     private static func escapeForAppleScriptDoScriptString(_ s: String) -> String {
         var r = ""
         for ch in s {

@@ -44,7 +44,8 @@
 **RLeon** is an open-source **macOS** app for people who want a **local-first** workflow: dictate with your voice, pull text from the screen or images with Vision, and chat with a **local Ollama** model — optionally with **function calling** into native macOS actions (pasteboard, open apps/URLs, Terminal, type into the focused field, and more).
 
 - **Privacy by default:** speech and OCR run on-device; Ollama is typically `localhost` (you control the model).
-- **English UI** and default prompts.
+- **English UI** and default prompts (all user-visible strings are English).
+- **Recognition:** speech defaults to **en-US**; Vision OCR uses **en-US** then **tr-TR** for mixed-language screen text.
 - **Safety-first:** high-risk tools (shell, typing into other apps) are **off by default** and gated in Settings.
 
 ---

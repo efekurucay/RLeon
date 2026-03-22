@@ -1,6 +1,6 @@
 import SwiftUI
 
-/// Menü çubuğu: ağır animasyon yok (kayıtta ana döngü kilitlenmesin).
+/// Menu bar extra: avoid heavy animation (recording must not block the main run loop).
 private struct MenuBarLabel: View {
     @ObservedObject var fn: FnPushToTalkCoordinator
 

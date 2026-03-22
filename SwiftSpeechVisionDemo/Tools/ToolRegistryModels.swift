@@ -1,16 +1,16 @@
 import Foundation
 
-/// Tek bir yerleşik araç için kullanıcı özelleştirmesi (başlık, alt başlık, modele giden açıklama).
+/// Per-tool user customization (title, subtitle, model-facing description).
 struct ToolProfile: Codable, Equatable {
     var isEnabled: Bool = true
     var customTitle: String?
     var customSubtitle: String?
-    /// Ollama `function.description` — boşsa uygulama varsayılanı kullanılır.
+    /// Ollama `function.description`; empty means use the app default.
     var customDescription: String?
 }
 
 struct ToolRegistryState: Codable, Equatable {
-    /// Görünen sıra; yalnızca `LocalToolStore.allToolIds` içinden kimlikler.
+    /// Display order; IDs must come from `LocalToolStore.allToolIds`.
     var orderedIds: [String]
     var profiles: [String: ToolProfile]
 }

@@ -3,10 +3,10 @@ import ApplicationServices
 import Carbon.HIToolbox
 import Darwin
 
-/// Odaklı metin alanına yazma: Erişilebilirlik izni gerekir.
-/// Sıra: AX (seçili / value sonu) → CGEvent Unicode → pano + ⌘V.
+/// Insert text into the focused field. Requires Accessibility access.
+/// Order: AX (selection / value append) → CGEvent Unicode → pasteboard + ⌘V.
 enum FocusedTextInsertion {
-    /// Yalnızca henüz güvenilmiyorsa sistem izin penceresini gösterir.
+    /// Shows the system permission prompt only when the app is not yet trusted for Accessibility.
     static func requestAccessibilityPromptIfNeeded() {
         guard !AXIsProcessTrusted() else { return }
         let key = kAXTrustedCheckOptionPrompt.takeUnretainedValue() as String
@@ -18,7 +18,7 @@ enum FocusedTextInsertion {
         AXIsProcessTrusted()
     }
 
-    /// Kısa kod döner (LLM / araç çıktısı için; uzun Türkçe uyarı verme).
+    /// Returns a short code for LLM / tool output (keep messages brief).
     @MainActor
     static func insertText(_ text: String) -> String {
         guard AXIsProcessTrusted() else { return "AX_NOT_TRUSTED" }
@@ -35,7 +35,7 @@ enum FocusedTextInsertion {
         return "FAILED_FOCUS"
     }
 
-    /// Arayüz için tek satır; `insertText` kodlarını çevirir.
+    /// One-line UI string; maps `insertText` result codes to readable text.
     static func localizedUserMessage(for code: String) -> String {
         switch code {
         case "AX_NOT_TRUSTED":
@@ -61,7 +61,7 @@ enum FocusedTextInsertion {
         Bundle.main.bundlePath
     }
 
-    /// Sistem Ayarları → Erişilebilirlik (sürüme göre birden fazla URL dene).
+    /// System Settings → Accessibility (try multiple URLs for different macOS versions).
     static func openAccessibilitySettings() {
         let ids = [
             "x-apple.systempreferences:com.apple.settings.PrivacySecurity.extension?privacy_Accessibility",
@@ -72,7 +72,7 @@ enum FocusedTextInsertion {
         }
     }
 
-    // MARK: - Ön plan
+    // MARK: - Foreground
 
     private static func resignActiveIfNeededBeforeTargetingOtherApp() {
         let myPid = ProcessInfo.processInfo.processIdentifier
@@ -82,7 +82,7 @@ enum FocusedTextInsertion {
         }
     }
 
-    // MARK: - Pano + ⌘V (son çare)
+    // MARK: - Pasteboard + ⌘V (last resort)
 
     private static func tryPasteCommandV(_ text: String) -> String? {
         let pb = NSPasteboard.general

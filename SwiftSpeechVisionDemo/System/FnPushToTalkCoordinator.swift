@@ -1,8 +1,8 @@
 import AppKit
 import SwiftUI
 
-/// FN: kısa dokunuş → “sadece diktasyon” modunu silahlar; ardından basılı tutunca Ollama’ya gitmeden metin üretir.
-/// Uzun basılı tutma (~250 ms) → konuşma + OCR → bırakınca Ollama (önceki davranış).
+/// Fn: short tap arms **dictation-only** mode; a subsequent hold produces text without sending to Ollama.
+/// Long hold (~250 ms) → speech + OCR → on release, send to Ollama (previous default behavior).
 @MainActor
 final class FnPushToTalkCoordinator: ObservableObject {
     enum Phase: String {
@@ -14,9 +14,9 @@ final class FnPushToTalkCoordinator: ObservableObject {
     @Published private(set) var phase: Phase = .idle
     @Published private(set) var lastError: String?
     @Published private(set) var lastOllamaReply: String?
-    /// Sadece diktasyon (FN kısa dokunuş + sonra basılı tut) sonucu; Ollama’ya gönderilmez.
+    /// Dictation-only transcript (short tap then hold); not sent to Ollama.
     @Published private(set) var lastDictationOnlyTranscript: String?
-    /// Diktasyon metninin odaklı uygulamaya yazılması denemesinin özeti (başarı / hata).
+    /// Short summary of the attempt to insert dictation into the focused app (success / error).
     @Published private(set) var lastDictationFocusMessage: String?
     @Published private(set) var isMonitoring = false
 

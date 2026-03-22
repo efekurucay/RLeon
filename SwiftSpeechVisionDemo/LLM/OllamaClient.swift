@@ -1,6 +1,6 @@
 import Foundation
 
-/// Yerel Ollama HTTP API (`http://127.0.0.1:11434` varsayılan).
+/// Local Ollama HTTP API (default base `http://127.0.0.1:11434`).
 enum OllamaClient {
     struct OllamaError: LocalizedError {
         let message: String

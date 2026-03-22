@@ -9,7 +9,7 @@ final class SpeechTranscriber: ObservableObject {
     @Published private(set) var errorMessage: String?
     @Published private(set) var authStatus: SFSpeechRecognizerAuthorizationStatus = .notDetermined
 
-    /// Sunucu yok: yalnızca cihaz üzeri model (dil desteklenmiyorsa `start` başlamaz).
+    /// No server: on-device recognition only (`start` fails if the language pack is missing).
     var supportsOnDeviceRecognition: Bool {
         (recognizer?.supportsOnDeviceRecognition ?? false) && (recognizer?.isAvailable ?? false)
     }
@@ -71,7 +71,7 @@ final class SpeechTranscriber: ObservableObject {
             return
         }
 
-        // Her oturumda reset pahalı ve ana iş parçacığını kilitleyebilir; `hardStop` / `stop` zaten sıfırlıyor.
+        // Avoid resetting the recognizer every session — expensive and can block the main thread; hardStop/stop already reset.
 
         request = SFSpeechAudioBufferRecognitionRequest()
         guard let request else { return }
@@ -118,17 +118,17 @@ final class SpeechTranscriber: ObservableObject {
         isListening = true
     }
 
-    /// FN basılı tutma: transkript önceki oturumdan birikmez.
+    /// Fn hold: transcript does not carry over from a previous session.
     func startForPushToTalk() {
         start(clearTranscript: true)
     }
 
-    /// FN iptal veya `start` henüz çalışmadan bırakma: metni temiz tut.
+    /// Fn cancelled or released before `start` completed: keep transcript empty.
     func clearTranscriptForCancelledPushToTalk() {
         transcript = ""
     }
 
-    /// FN bırakıldı: önce akışı bitir, sonra motoru durdur; ardından final bekle.
+    /// Fn released: end audio flow, stop engine, then wait for a final result.
     func stopPushToTalkAwaitFinal() async {
         guard isListening else {
             return
@@ -190,7 +190,7 @@ final class SpeechTranscriber: ObservableObject {
         }
     }
 
-    /// Arayüz “Durdur” — hızlı kesme.
+    /// UI “Stop” — fast cut.
     func stop() {
         suppressRecognitionErrors = true
         finalTimeoutTask?.cancel()

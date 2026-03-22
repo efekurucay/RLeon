@@ -2,8 +2,8 @@ import AppKit
 import CoreGraphics
 import Vision
 
-/// En yüksek kalite: `accurate`, tam çözünürlük (`minimumTextHeight == 0`), güncel `revision`,
-/// dil düzeltmesi, gözlemleri okuma sırasına göre birleştirme ve en güvenilir aday metin.
+/// High-quality path: `accurate`, full resolution (`minimumTextHeight == 0`), current `revision`,
+/// language correction, merge observations in reading order, pick best candidate per region.
 enum VisionOCR {
     static func recognizeText(
         from image: NSImage,
@@ -15,7 +15,7 @@ enum VisionOCR {
         return try recognizeText(from: cgImage, languages: languages)
     }
 
-    /// `CGImage` ile doğrudan (arka plan iş parçacığında güvenli; `NSImage` gerektirmez).
+    /// Direct `CGImage` entry (safe on a background thread; no `NSImage` required).
     static func recognizeText(
         from cgImage: CGImage,
         languages: [String] = ["en-US", "tr-TR"]
@@ -47,8 +47,8 @@ enum VisionOCR {
         return resultText
     }
 
-    /// Gözlemleri sayfa okuma sırasına (üstten alta, soldan sağa) göre sıralar;
-    /// her bölge için `topCandidates` içinden en yüksek güvene sahip metni seçer.
+    /// Sort observations in reading order (top-to-bottom, left-to-right);
+    /// for each region, take the highest-confidence string from `topCandidates`.
     private static func joinedText(from observations: [VNRecognizedTextObservation]) -> String {
         let sorted = observations.sorted { a, b in
             let dy = abs(a.boundingBox.midY - b.boundingBox.midY)
