@@ -34,3 +34,7 @@ Implemented in `OllamaToolCalling.executeLocalTool` and registered via `LocalToo
 `MCPToolBridge` merges `mcp_*` tool definitions into the Ollama payload when enabled. Full client wiring (swift-sdk `tools/list` / `tools/call`) is **not** complete yet; see [README](../README.md) and [CONTRIBUTING](../CONTRIBUTING.md).
 
 Suggested tool naming: `mcp_<serverSlug>_<toolName>` to avoid collisions with built-ins.
+
+## See also
+
+- **[ROADMAP.md](../ROADMAP.md)** — shipped vs planned work and priorities.

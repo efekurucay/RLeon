@@ -30,7 +30,7 @@
 - [Configuration](#configuration)
 - [Built-in tools](#built-in-tools)
 - [MCP (experimental)](#mcp-experimental)
-- [Roadmap](#roadmap)
+- [Roadmap](#roadmap) · [detailed roadmap](ROADMAP.md)
 - [Documentation](#documentation)
 - [Contributing](#contributing)
 - [Security](#security)
@@ -133,13 +133,9 @@ Tools are sent to Ollama as OpenAI-compatible `function` definitions when enable
 
 ## Roadmap
 
-Ideas for growing the project (contributions welcome):
+High level: **releases & trust** (screenshots, GitHub Releases, signing docs), **safety** (per-command confirmation, stronger validation), **quality** (tests, CI hardening), then **full MCP** (swift-sdk, stdio/HTTP transport, “Add MCP server” in Settings).
 
-- Full **MCP client** (swift-sdk) + optional server presets in Settings.
-- **Per-command confirmation** for `run_terminal_command` and stronger argument validation.
-- **Configurable hotkey** if Fn conflicts with system dictation.
-- **Tests** (tool calling round-trip, permission mocks).
-- **Screenshots** and **notarized** release builds for GitHub Releases.
+The **detailed, maintained plan** — what’s done, what’s next, priorities — lives in **[ROADMAP.md](ROADMAP.md)**.
 
 ---
 
@@ -151,6 +147,7 @@ Ideas for growing the project (contributions welcome):
 | [SECURITY.md](SECURITY.md) | Vulnerability reporting, threat model |
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community expectations |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Data flow and key components |
+| [ROADMAP.md](ROADMAP.md) | Done vs planned work, near/mid/long term |
 
 ---
 
