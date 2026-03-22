@@ -9,4 +9,4 @@
 ## Checklist
 
 - [ ] No secrets or personal paths committed
-- [ ] README / ARCHITECTURE updated if behavior changed for users
+- [ ] README or `docs/ARCHITECTURE.md` updated if behavior changed for users

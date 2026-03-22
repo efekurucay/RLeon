@@ -27,10 +27,10 @@ Implemented in `OllamaToolCalling.executeLocalTool` and registered via `LocalToo
 
 `FnPushToTalkCoordinator` monitors the **Fn** key (`keyCode` 63) via `NSEvent` global/local monitors. Short tap arms dictation-only; hold ≥ ~250 ms starts full capture (speech + main display OCR). On release, transcript (+ OCR) is sent to Ollama when not in dictation-only mode.
 
-**Note:** macOS also uses Fn for system shortcuts (e.g. dictation). If you hit conflicts, a future revision may expose a configurable hotkey (see research notes).
+**Note:** macOS also uses Fn for system shortcuts (e.g. dictation). If you hit conflicts, a future revision may expose a configurable hotkey.
 
 ## MCP bridge
 
-`MCPToolBridge` merges `mcp_*` tool definitions into the Ollama payload when enabled. Full client wiring (swift-sdk `tools/list` / `tools/call`) is **not** complete yet; see [README](README.md) and [CONTRIBUTING](CONTRIBUTING.md).
+`MCPToolBridge` merges `mcp_*` tool definitions into the Ollama payload when enabled. Full client wiring (swift-sdk `tools/list` / `tools/call`) is **not** complete yet; see [README](../README.md) and [CONTRIBUTING](../CONTRIBUTING.md).
 
 Suggested tool naming: `mcp_<serverSlug>_<toolName>` to avoid collisions with built-ins.

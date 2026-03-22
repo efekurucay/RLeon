@@ -20,7 +20,7 @@ Add the package in Xcode: **File → Add Package Dependencies…** → `https://
 
 - Keep PRs **focused** (one feature or fix per PR when possible).
 - Match existing Swift style and project layout (`App/`, `UI/`, `LLM/`, etc.).
-- Update **README** or **ARCHITECTURE.md** if you change user-visible behavior or data flow.
+- Update **README** or **[docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)** if you change user-visible behavior or data flow.
 - Do not commit secrets, API keys, or personal paths.
 
 ## Issues
