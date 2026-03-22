@@ -10,14 +10,14 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/YOUR_USERNAME/RLeon/actions/workflows/ci.yml"><img src="https://github.com/YOUR_USERNAME/RLeon/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/efekurucay/RLeon/actions/workflows/ci.yml"><img src="https://github.com/efekurucay/RLeon/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <img src="https://img.shields.io/badge/platform-macOS%2014+-blue?style=flat-square" alt="macOS" />
   <img src="https://img.shields.io/badge/Swift-5.0-F05138?style=flat-square&logo=swift&logoColor=white" alt="Swift" />
   <img src="https://img.shields.io/badge/license-MIT-green?style=flat-square" alt="License" />
   <a href="https://ollama.com"><img src="https://img.shields.io/badge/Ollama-tool%20calling-00ADD8?style=flat-square" alt="Ollama" /></a>
 </p>
 
-<p align="center"><sub>Replace <code>YOUR_USERNAME</code> with your GitHub username after the repo is public (CI badge activates after the first workflow run).</sub></p>
+<p align="center"><sub>CI badge updates after the first successful run on <code>main</code>.</sub></p>
 
 ---
 
@@ -74,7 +74,7 @@
 ## Getting started
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/RLeon.git
+git clone https://github.com/efekurucay/RLeon.git
 cd RLeon
 open SwiftSpeechVisionDemo.xcodeproj
 ```

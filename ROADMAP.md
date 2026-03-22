@@ -1,6 +1,6 @@
 # RLeon roadmap
 
-This document describes **what is already in place**, **what we plan next**, and **how priorities are reasoned**. It is a living document; [issues](https://github.com/YOUR_USERNAME/RLeon/issues) and focused PRs shape the order of work.
+This document describes **what is already in place**, **what we plan next**, and **how priorities are reasoned**. It is a living document; [issues](https://github.com/efekurucay/RLeon/issues) and focused PRs shape the order of work.
 
 ---
 
@@ -52,7 +52,7 @@ Priorities that unlock the most users with limited scope creep.
 | --- | --- |
 | **Screenshots / short demo** | README and social previews; lowers onboarding friction. |
 | **GitHub Releases** | Tagged builds; users know what to download. |
-| **Replace `YOUR_USERNAME` placeholders** | CI badge and doc links after the repo is public under the real owner/org. |
+| **Verify CI on `main`** | After the first push, confirm Actions runs green and the README badge loads. |
 | **Optional notarization / signing notes** | Document or automate steps for distributing outside the Mac App Store. |
 
 ### 2. Safety & control (high impact)

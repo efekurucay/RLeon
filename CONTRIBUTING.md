@@ -41,7 +41,7 @@ Create the remote repository named **`RLeon`** on GitHub (empty, no README if yo
 
 ```bash
 git branch -M main
-git remote add origin https://github.com/YOUR_USERNAME/RLeon.git
+git remote add origin https://github.com/efekurucay/RLeon.git
 git push -u origin main
 ```
 
