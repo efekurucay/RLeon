@@ -21,7 +21,7 @@ This document describes **what is already in place**, **what we plan next**, and
 | **Ollama chat** | `POST /api/chat`, configurable base URL and model name. |
 | **Tool calling** | OpenAI-shaped `tools` / `tool_calls` round-trip; Swift execution → `role: tool` follow-up. |
 | **Built-in tools** | Clipboard, app info, open app/URL, WhatsApp compose, Terminal (high risk), type into focused field (high risk). |
-| **Safety** | Dangerous tools **off** by default; `ToolSafetySettings` + **Settings → Dangerous tools & MCP** before model sees `run_terminal_command` / `type_into_focused_field`. |
+| **Safety** | Dangerous tools **off** by default; **Settings → Dangerous tools & MCP** before the model sees `run_terminal_command` / `type_into_focused_field`. **Per-call** modal confirmation for each Terminal command and cross-app typing (default on; optional opt-out). Length limits: command 16k chars, typed text 50k. |
 | **FN + menu bar** | `FnPushToTalkCoordinator`: short tap vs hold for dictation vs full pipeline. |
 | **MCP hook** | `MCPToolBridge` + `mcp_*` naming convention; **stub only** (no live `tools/list` / `tools/call`). |
 
@@ -32,43 +32,43 @@ This document describes **what is already in place**, **what we plan next**, and
 | **macOS** | Target **14+**; Xcode **15+** for build. |
 | **CI** | GitHub Actions: `xcodebuild` Debug build on macOS runner (`.github/workflows/ci.yml`). |
 | **Community** | `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue templates, PR template. |
-| **Docs** | Root README (with screenshots); technical deep-dive in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). |
+| **Docs** | Root README (with screenshots); [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md); [`docs/NOTARIZATION.md`](docs/NOTARIZATION.md) (distribution outline). |
+| **Releases** | **v0.1.0**, **v0.1.1** on GitHub (source-first); notes in [`.github/release-notes-v0.1.0.md`](.github/release-notes-v0.1.0.md) and [`.github/release-notes-v0.1.1.md`](.github/release-notes-v0.1.1.md). |
 
 ### Recent repo / docs cleanup (already done)
 
 - Removed optional **research prompt** and **app icon generator** script; leaner tree.
 - **`ARCHITECTURE.md`** lives under **`docs/`**; root keeps GitHub-standard files (README, contributing, security, CoC).
 - README oriented toward **open-source** discoverability (features, setup, tools table, doc index).
+- **Screenshots:** illustrative preview in README; `scripts/capture_screenshot.sh` for a real local capture (`main-window-real.png`, gitignored).
 
 ---
 
 ## Near term (next milestones)
 
-Priorities that unlock the most users with limited scope creep.
+Work that is **still open**; items already shipped live in [Current state](#current-state-shipped) above.
 
-### 1. Release & trust signals
-
-| Item | Rationale |
-| --- | --- |
-| **Screenshots / short demo** | README includes an illustrative preview; `scripts/capture_screenshot.sh` for a real local capture (`main-window-real.png`, gitignored). |
-| **GitHub Releases** | **v0.1.0** tag + notes (source-first; optional signed `.app` later). |
-| **Verify CI on `main`** | After the first push, confirm Actions runs green and the README badge loads. |
-| **Optional notarization / signing notes** | [`docs/NOTARIZATION.md`](docs/NOTARIZATION.md) — expand when CI produces signed builds. |
-
-### 2. Safety & control (high impact)
+### 1. Quality & CI
 
 | Item | Rationale |
 | --- | --- |
-| **Per-invocation confirmation** | **Shipped:** modal for each `run_terminal_command` and `type_into_focused_field` (defaults on; optional opt-out in Settings). |
-| **Stronger validation** | **Partial:** max length for shell command (16k) and typed text (50k); further denylists TBD. |
-| **Clearer UX copy** | **Partial:** disabled tools / MCP off / user cancel / type insertion now return readable strings. |
+| **Unit / integration tests** | Tool calling round-trip, `ToolSafetySettings` + confirmation paths, mocks for Ollama HTTP. |
+| **CI hardening** | Optional **Release** configuration and/or second Xcode/macOS version if maintenance cost stays low. |
+| **Dependency hygiene** | e.g. Dependabot for GitHub Actions; add when the workflow grows beyond checkout + build. |
 
-### 3. Quality
+### 2. Safety polish
 
 | Item | Rationale |
 | --- | --- |
-| **Unit / integration tests** | Tool calling round-trip, `ToolSafetySettings` behavior, mocks for HTTP. |
-| **CI optional matrix** | e.g. Xcode version or Release configuration if maintenance cost stays low. |
+| **Stronger validation** | **Partial today:** length limits only. Optional: denylists / safer quoting for shell, argument allowlists for risky tools. |
+| **Edge-case UX** | Clearer messages for rare failure modes; optional timeout around modal + LLM round-trip. |
+
+### 3. Distribution (optional)
+
+| Item | Rationale |
+| --- | --- |
+| **Signed / notarized `.app` in CI** | Documented in [`docs/NOTARIZATION.md`](docs/NOTARIZATION.md); automation TBD (needs Apple ID / certs). |
+| **Short demo video or GIF** | Lowers onboarding friction; optional polish. |
 
 ---
 
@@ -127,9 +127,9 @@ Ideas that depend on adoption, contributors, or ecosystem direction.
 
 | Horizon | Themes |
 | --- | --- |
-| **Done** | Local speech/OCR/Ollama, tool calling, safety gates, MCP stub, CI, community docs, `docs/ARCHITECTURE`. |
-| **Near** | Releases/screenshots, per-command confirmation, tests, polish. |
-| **Mid** | Full MCP client + Settings, configurable hotkey, optional profiles. |
+| **Done** | Local speech/OCR/Ollama, tool calling, safety gates + **per-call** Terminal/typing confirmation, MCP stub, CI, community docs, README screenshots, **v0.1.x** releases, `docs/ARCHITECTURE` + `docs/NOTARIZATION`. |
+| **Near** | Automated tests, CI hardening, optional shell validation / UX polish, optional signed build pipeline. |
+| **Mid** | Full MCP client + Settings, configurable hotkey, optional tool profiles. |
 | **Long** | Plugins/i18n/cross-platform only if justified. |
 
 When in doubt, prefer **safety**, **clarity**, and **small iterative changes** over breadth.

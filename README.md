@@ -145,7 +145,7 @@ Tools are sent to Ollama as OpenAI-compatible `function` definitions when enable
 
 ## Roadmap
 
-High level: **releases & trust** (screenshots, GitHub Releases, [notarization notes](docs/NOTARIZATION.md)), **safety** (per-call confirmation for Terminal/typing, length limits), **quality** (tests, CI hardening), then **full MCP** (swift-sdk, “Add MCP server” in Settings).
+High level: **shipped** — screenshots, **v0.1.x** releases, [notarization notes](docs/NOTARIZATION.md), per-call confirmation for Terminal/typing. **Next:** tests & CI hardening, stronger shell validation, then **full MCP** (swift-sdk, “Add MCP server” in Settings).
 
 The **detailed, maintained plan** — what’s done, what’s next, priorities — lives in **[ROADMAP.md](ROADMAP.md)**.
 
