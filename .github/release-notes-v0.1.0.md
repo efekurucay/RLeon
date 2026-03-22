@@ -14,7 +14,7 @@ First public release: **local-first macOS** assistant — on-device speech, Visi
 ### Build from source
 
 - **macOS 14+**, **Xcode 15+**
-- Clone, open `SwiftSpeechVisionDemo.xcodeproj`, scheme **SwiftSpeechVisionDemo**, destination **My Mac**
+- Clone, open **`RLeon.xcodeproj`**, scheme **RLeon**, destination **My Mac**
 
 See the [README](https://github.com/efekurucay/RLeon#readme) for configuration, tool tables, and security notes.
 

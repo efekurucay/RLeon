@@ -2,6 +2,11 @@
 
 High-level data flow (local-first).
 
+## Repository layout
+
+- **`RLeon.xcodeproj`** — Xcode project; shared scheme **RLeon** (product **RLeon.app**).
+- **`RLeon/`** — Swift sources: `App`, `UI`, `LLM`, `Speech`, `OCR`, `System`, `Tools`, `Resources`.
+
 ## Speech → text
 
 `SpeechTranscriber` uses `SFSpeechRecognizer` + `AVAudioEngine` with **on-device** recognition (`requiresOnDeviceRecognition`). Default locale is `en-US`.

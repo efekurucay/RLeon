@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="SwiftSpeechVisionDemo/Resources/Assets.xcassets/AppIcon.appiconset/icon_256x256.png" width="128" height="128" alt="RLeon" />
+  <img src="RLeon/Resources/Assets.xcassets/AppIcon.appiconset/icon_256x256.png" width="128" height="128" alt="RLeon" />
 </p>
 
 <h1 align="center">RLeon</h1>
@@ -88,21 +88,21 @@
 ```bash
 git clone https://github.com/efekurucay/RLeon.git
 cd RLeon
-open SwiftSpeechVisionDemo.xcodeproj
+open RLeon.xcodeproj
 ```
 
-1. Select scheme **SwiftSpeechVisionDemo**, destination **My Mac**.
+1. Select scheme **RLeon**, destination **My Mac**.
 2. **⌘B** to build; product is **`RLeon.app`**.
 
 **Release build (CLI):**
 
 ```bash
-xcodebuild -scheme SwiftSpeechVisionDemo -configuration Release -destination 'platform=macOS' build
+xcodebuild -scheme RLeon -configuration Release -destination 'platform=macOS' build
 ```
 
 Typical output path:
 
-`~/Library/Developer/Xcode/DerivedData/SwiftSpeechVisionDemo-*/Build/Products/Release/RLeon.app`
+`~/Library/Developer/Xcode/DerivedData/RLeon-*/Build/Products/Release/RLeon.app`
 
 ---
 

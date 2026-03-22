@@ -4,7 +4,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
-xcodebuild -scheme SwiftSpeechVisionDemo -configuration Release -destination 'platform=macOS' build -quiet
+xcodebuild -scheme RLeon -configuration Release -destination 'platform=macOS' build -quiet
 APP="$(find "$HOME/Library/Developer/Xcode/DerivedData" -name 'RLeon.app' -path '*Release*' 2>/dev/null | head -1)"
 if [[ -z "${APP}" ]]; then
   echo "RLeon.app (Release) not found under DerivedData."

@@ -14,4 +14,4 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build (Debug)
-        run: xcodebuild -scheme SwiftSpeechVisionDemo -configuration Debug -destination 'platform=macOS' build
+        run: xcodebuild -project RLeon.xcodeproj -scheme RLeon -configuration Debug -destination 'platform=macOS' build

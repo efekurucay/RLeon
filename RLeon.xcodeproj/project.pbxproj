@@ -70,12 +70,12 @@
 		AA0000050000000000000001 = {
 			isa = PBXGroup;
 			children = (
-				AA0000050000000000000002 /* SwiftSpeechVisionDemo */,
+				AA0000050000000000000002 /* RLeon */,
 				AA0000050000000000000003 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		AA0000050000000000000002 /* SwiftSpeechVisionDemo */ = {
+		AA0000050000000000000002 /* RLeon */ = {
 			isa = PBXGroup;
 			children = (
 				AA0000050000000000000004 /* App */,
@@ -87,7 +87,7 @@
 				AA000005000000000000000A /* Tools */,
 				AA000005000000000000000B /* Resources */,
 			);
-			path = SwiftSpeechVisionDemo;
+			path = RLeon;
 			sourceTree = "<group>";
 		};
 		AA0000050000000000000004 /* App */ = {
@@ -211,7 +211,7 @@
 					};
 				};
 			};
-			buildConfigurationList = AA0000070000000000000002 /* Build configuration list for PBXProject "SwiftSpeechVisionDemo" */;
+			buildConfigurationList = AA0000070000000000000002 /* Build configuration list for PBXProject "RLeon" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -402,7 +402,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = SwiftSpeechVisionDemo/Resources/Info.plist;
+				INFOPLIST_FILE = RLeon/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -424,7 +424,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = NO;
-				INFOPLIST_FILE = SwiftSpeechVisionDemo/Resources/Info.plist;
+				INFOPLIST_FILE = RLeon/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -449,7 +449,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		AA0000070000000000000002 /* Build configuration list for PBXProject "SwiftSpeechVisionDemo" */ = {
+		AA0000070000000000000002 /* Build configuration list for PBXProject "RLeon" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				AA00000A0000000000000001 /* Debug */,

@@ -5,8 +5,8 @@ Thanks for your interest in RLeon.
 ## Getting started
 
 1. Fork and clone the repository.
-2. Open `SwiftSpeechVisionDemo.xcodeproj` in **Xcode 15+** (macOS 14+).
-3. Build the **SwiftSpeechVisionDemo** scheme for **My Mac** (product: **RLeon.app**).
+2. Open **`RLeon.xcodeproj`** in **Xcode 15+** (macOS 14+).
+3. Build the **RLeon** scheme for **My Mac** (product: **RLeon.app**).
 
 Optional: [Ollama](https://ollama.com) on `http://127.0.0.1:11434` for LLM features.
 

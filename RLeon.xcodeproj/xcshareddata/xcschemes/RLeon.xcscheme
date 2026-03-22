@@ -17,7 +17,7 @@
                BlueprintIdentifier = "AA0000060000000000000001"
                BuildableName = "RLeon.app"
                BlueprintName = "RLeon"
-               ReferencedContainer = "container:SwiftSpeechVisionDemo.xcodeproj">
+               ReferencedContainer = "container:RLeon.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -46,7 +46,7 @@
             BlueprintIdentifier = "AA0000060000000000000001"
             BuildableName = "RLeon.app"
             BlueprintName = "RLeon"
-            ReferencedContainer = "container:SwiftSpeechVisionDemo.xcodeproj">
+            ReferencedContainer = "container:RLeon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -63,7 +63,7 @@
             BlueprintIdentifier = "AA0000060000000000000001"
             BuildableName = "RLeon.app"
             BlueprintName = "RLeon"
-            ReferencedContainer = "container:SwiftSpeechVisionDemo.xcodeproj">
+            ReferencedContainer = "container:RLeon.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
