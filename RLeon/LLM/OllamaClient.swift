@@ -1,30 +1,49 @@
 import Foundation
 
 /// Local Ollama HTTP API (default base `http://127.0.0.1:11434`).
+///
+/// The `session` parameter defaults to `URLSession.shared` in production.
+/// Pass a custom session (backed by a `URLProtocol` stub) in tests to avoid
+/// real network calls.
 enum OllamaClient {
     struct OllamaError: LocalizedError {
         let message: String
         var errorDescription: String? { message }
     }
 
-    static func listModels(baseURL: URL) async throws -> [String] {
+    /// Lists available models from Ollama's `/api/tags` endpoint.
+    /// - Parameters:
+    ///   - baseURL: Ollama server base URL.
+    ///   - session: URLSession to use (injectable for testing; defaults to `.shared`).
+    static func listModels(
+        baseURL: URL,
+        session: URLSession = .shared
+    ) async throws -> [String] {
         let url = baseURL.appendingPathComponent("api/tags")
         var req = URLRequest(url: url)
         req.httpMethod = "GET"
         req.timeoutInterval = 30
 
-        let (data, response) = try await URLSession.shared.data(for: req)
+        let (data, response) = try await session.data(for: req)
         try throwIfHTTPError(response, data: data)
 
         let decoded = try JSONDecoder().decode(TagsResponse.self, from: data)
         return decoded.models.map(\.name).sorted()
     }
 
+    /// Sends a single-turn chat request (no tool calling).
+    /// - Parameters:
+    ///   - baseURL: Ollama server base URL.
+    ///   - model:   Model name (e.g. `qwen2.5:7b`).
+    ///   - systemPrompt: Optional system role message.
+    ///   - userContent:  User message content.
+    ///   - session: URLSession to use (injectable for testing; defaults to `.shared`).
     static func chat(
         baseURL: URL,
         model: String,
         systemPrompt: String?,
-        userContent: String
+        userContent: String,
+        session: URLSession = .shared
     ) async throws -> String {
         var messages: [ChatMessage] = []
         if let systemPrompt, !systemPrompt.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
@@ -40,14 +59,16 @@ enum OllamaClient {
         req.httpBody = try JSONEncoder().encode(body)
         req.timeoutInterval = 600
 
-        let (data, response) = try await URLSession.shared.data(for: req)
+        let (data, response) = try await session.data(for: req)
         try throwIfHTTPError(response, data: data)
 
         let decoded = try JSONDecoder().decode(ChatResponse.self, from: data)
         return decoded.message.content
     }
 
-    private static func throwIfHTTPError(_ response: URLResponse, data: Data) throws {
+    // MARK: - Private helpers
+
+    static func throwIfHTTPError(_ response: URLResponse, data: Data) throws {
         guard let http = response as? HTTPURLResponse else { return }
         guard (200 ... 299).contains(http.statusCode) else {
             let snippet = String(data: data, encoding: .utf8) ?? ""
@@ -55,11 +76,12 @@ enum OllamaClient {
         }
     }
 
+    // MARK: - Private Codable models
+
     private struct TagsResponse: Decodable {
         struct Model: Decodable {
             let name: String
         }
-
         let models: [Model]
     }
 
@@ -79,7 +101,6 @@ enum OllamaClient {
             let role: String
             let content: String
         }
-
         let message: Message
     }
 }
