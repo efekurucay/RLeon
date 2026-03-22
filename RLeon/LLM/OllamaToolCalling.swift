@@ -1,174 +1,59 @@
 import AppKit
 import Foundation
 
-/// OpenAI-style **tool calling** with Ollama `/api/chat`: model returns `tool_calls` → run in Swift → send results back as `role: tool`.
+/// OpenAI-style **tool calling** with Ollama `/api/chat`: model returns `tool_calls`
+/// → run in Swift → send results back as `role: tool`.
 /// Requires Ollama 0.4+ and a model that supports tools (e.g. llama3.1, qwen2.5 with tools).
 enum OllamaToolCalling {
     private static let maxRounds = 8
 
-    /// Tool definitions (JSON): built-ins from `LocalToolStore`; `mcp_*` tools from `MCPToolBridge`.
-    static func localToolDefinitionsJSON() -> [[String: Any]] {
+    // MARK: - Tool definitions
+
+    /// Tool definitions (JSON): built-ins from `BuiltInToolDefinitions`; `mcp_*` tools from `MCPToolBridge`.
+    /// Uses the Codable `ToolDefinition` type from ToolDefinitionModels.swift (Suggestion 1).
+    static func localToolDefinitionsJSON(session: URLSession = .shared) -> [[String: Any]] {
         let enabled = LocalToolStore.loadEnabled()
-        let combined = allToolDefinitionsUnfiltered() + MCPToolBridge.shared.openAIToolDefinitions()
-        return combined.filter { item in
-            guard let fn = item["function"] as? [String: Any],
-                  let n = fn["name"] as? String else { return false }
-            if n.hasPrefix("mcp_") {
-                return MCPToolBridge.shared.isEnabled
-            }
-            guard enabled.contains(n) else { return false }
-            return ToolSafetySettings.isExposedToModel(toolId: n)
+        // Build typed definitions, apply user-customised descriptions, convert to [String:Any]
+        let builtIns: [[String: Any]] = BuiltInToolDefinitions.all.compactMap { def in
+            guard enabled.contains(def.function.name) else { return nil }
+            guard ToolSafetySettings.isExposedToModel(toolId: def.function.name) else { return nil }
+            // Apply user-overridden description if set
+            let effectiveDesc = LocalToolStore.effectiveModelDescription(
+                for: def.function.name,
+                default: def.function.description
+            )
+            let updated = ToolDefinition(
+                function: ToolFunction(
+                    name: def.function.name,
+                    description: effectiveDesc,
+                    parameters: def.function.parameters
+                )
+            )
+            return updated.asDictionary()
         }
+
+        let mcpTools: [[String: Any]] = MCPToolBridge.shared.isEnabled
+            ? MCPToolBridge.shared.openAIToolDefinitions()
+            : []
+
+        return builtIns + mcpTools
     }
 
-    private static func allToolDefinitionsUnfiltered() -> [[String: Any]] {
-        [
-            toolFunction(
-                name: "copy_to_clipboard",
-                description: LocalToolStore.effectiveModelDescription(
-                    for: "copy_to_clipboard",
-                    default: LocalToolStore.referenceModelDescription(for: "copy_to_clipboard")
-                ),
-                parameters: [
-                    "type": "object",
-                    "properties": [
-                        "text": [
-                            "type": "string",
-                            "description": "Text to place on the pasteboard.",
-                        ] as [String: Any],
-                    ] as [String: Any],
-                    "required": ["text"],
-                ] as [String: Any],
-            ),
-            toolFunction(
-                name: "get_app_info",
-                description: LocalToolStore.effectiveModelDescription(
-                    for: "get_app_info",
-                    default: LocalToolStore.referenceModelDescription(for: "get_app_info")
-                ),
-                parameters: [
-                    "type": "object",
-                    "properties": [:] as [String: Any],
-                    "required": [] as [String],
-                ] as [String: Any],
-            ),
-            toolFunction(
-                name: "open_application",
-                description: LocalToolStore.effectiveModelDescription(
-                    for: "open_application",
-                    default: LocalToolStore.referenceModelDescription(for: "open_application")
-                ),
-                parameters: [
-                    "type": "object",
-                    "properties": [
-                        "name": [
-                            "type": "string",
-                            "description": "Application name without .app, e.g. Safari, Notes, Calendar.",
-                        ] as [String: Any],
-                        "bundle_id": [
-                            "type": "string",
-                            "description": "Cocoa bundle identifier, e.g. com.apple.Safari. Takes precedence over name when set.",
-                        ] as [String: Any],
-                    ] as [String: Any],
-                    "required": [] as [String],
-                ] as [String: Any],
-            ),
-            toolFunction(
-                name: "open_url",
-                description: LocalToolStore.effectiveModelDescription(
-                    for: "open_url",
-                    default: LocalToolStore.referenceModelDescription(for: "open_url")
-                ),
-                parameters: [
-                    "type": "object",
-                    "properties": [
-                        "url": [
-                            "type": "string",
-                            "description": "Full URL or hostname (e.g. https://example.com or apple.com).",
-                        ] as [String: Any],
-                        "browser": [
-                            "type": "string",
-                            "description": "\"safari\" or \"default\" (default browser).",
-                        ] as [String: Any],
-                    ] as [String: Any],
-                    "required": ["url"],
-                ] as [String: Any],
-            ),
-            toolFunction(
-                name: "whatsapp_compose",
-                description: LocalToolStore.effectiveModelDescription(
-                    for: "whatsapp_compose",
-                    default: LocalToolStore.referenceModelDescription(for: "whatsapp_compose")
-                ),
-                parameters: [
-                    "type": "object",
-                    "properties": [
-                        "text": [
-                            "type": "string",
-                            "description": "Optional prefilled message text.",
-                        ] as [String: Any],
-                        "phone": [
-                            "type": "string",
-                            "description": "Digits only with country code (e.g. 14155552671).",
-                        ] as [String: Any],
-                    ] as [String: Any],
-                    "required": [] as [String],
-                ] as [String: Any],
-            ),
-            toolFunction(
-                name: "run_terminal_command",
-                description: LocalToolStore.effectiveModelDescription(
-                    for: "run_terminal_command",
-                    default: LocalToolStore.referenceModelDescription(for: "run_terminal_command")
-                ),
-                parameters: [
-                    "type": "object",
-                    "properties": [
-                        "command": [
-                            "type": "string",
-                            "description": "Shell command to run (e.g. ls -la, cd ~/Desktop && pwd).",
-                        ] as [String: Any],
-                    ] as [String: Any],
-                    "required": ["command"],
-                ] as [String: Any],
-            ),
-            toolFunction(
-                name: "type_into_focused_field",
-                description: LocalToolStore.effectiveModelDescription(
-                    for: "type_into_focused_field",
-                    default: LocalToolStore.referenceModelDescription(for: "type_into_focused_field")
-                ),
-                parameters: [
-                    "type": "object",
-                    "properties": [
-                        "text": [
-                            "type": "string",
-                            "description": "Text to type (any Unicode).",
-                        ] as [String: Any],
-                    ] as [String: Any],
-                    "required": ["text"],
-                ] as [String: Any],
-            ),
-        ]
-    }
-
-    private static func toolFunction(name: String, description: String, parameters: [String: Any]) -> [String: Any] {
-        [
-            "type": "function",
-            "function": [
-                "name": name,
-                "description": description,
-                "parameters": parameters,
-            ],
-        ]
-    }
+    // MARK: - Chat loop
 
     /// Single-turn chat with a multi-round tool loop when needed; returns the final assistant text.
+    /// - Parameters:
+    ///   - baseURL: Ollama server base URL.
+    ///   - model:   Model name.
+    ///   - systemPrompt: Optional system message.
+    ///   - userContent:  User message.
+    ///   - session: URLSession to use (injectable for testing; defaults to `.shared`).
     static func chatWithLocalTools(
         baseURL: URL,
         model: String,
         systemPrompt: String?,
-        userContent: String
+        userContent: String,
+        session: URLSession = .shared
     ) async throws -> String {
         var messages: [[String: Any]] = []
         if let s = systemPrompt?.trimmingCharacters(in: .whitespacesAndNewlines), !s.isEmpty {
@@ -176,7 +61,7 @@ enum OllamaToolCalling {
         }
         messages.append(["role": "user", "content": userContent])
 
-        let tools = localToolDefinitionsJSON()
+        let tools = localToolDefinitionsJSON(session: session)
 
         for _ in 0 ..< maxRounds {
             var body: [String: Any] = [
@@ -196,8 +81,8 @@ enum OllamaToolCalling {
             req.httpBody = data
             req.timeoutInterval = 600
 
-            let (respData, resp) = try await URLSession.shared.data(for: req)
-            try throwIfHTTPError(resp, data: respData)
+            let (respData, resp) = try await session.data(for: req)
+            try OllamaClient.throwIfHTTPError(resp, data: respData)
 
             guard
                 let json = try JSONSerialization.jsonObject(with: respData) as? [String: Any],
@@ -212,7 +97,6 @@ enum OllamaToolCalling {
                     guard let fn = tc["function"] as? [String: Any],
                           let name = fn["name"] as? String
                     else { continue }
-                    // Ollama often returns `arguments` as an object; some builds use a string — accept both.
                     guard let argsStr = jsonStringFromToolArguments(fn["arguments"]) else { continue }
                     let result = try await executeLocalTool(name: name, argumentsJSON: argsStr)
                     var toolMsg: [String: Any] = [
@@ -235,6 +119,8 @@ enum OllamaToolCalling {
         throw OllamaClient.OllamaError(message: "Tool round limit (\(maxRounds)) exceeded.")
     }
 
+    // MARK: - Private helpers
+
     /// In `/api/chat` responses, `function.arguments` may be a string or a JSON object.
     private static func jsonStringFromToolArguments(_ value: Any?) -> String? {
         if let s = value as? String { return s }
@@ -245,27 +131,6 @@ enum OllamaToolCalling {
         return String(data: data, encoding: .utf8)
     }
 
-    private static func throwIfHTTPError(_ response: URLResponse, data: Data) throws {
-        guard let http = response as? HTTPURLResponse else { return }
-        guard (200 ... 299).contains(http.statusCode) else {
-            let snippet = String(data: data, encoding: .utf8) ?? ""
-            throw OllamaClient.OllamaError(message: "HTTP \(http.statusCode): \(snippet.prefix(400))")
-        }
-    }
-
-    /// Escape a string for use inside AppleScript `do script "..."`.
-    private static func escapeForAppleScriptDoScriptString(_ s: String) -> String {
-        var r = ""
-        for ch in s {
-            switch ch {
-            case "\\": r += "\\\\"
-            case "\"": r += "\\\""
-            default: r.append(ch)
-            }
-        }
-        return r
-    }
-
     private static func normalizeHTTPURLString(_ raw: String) -> URL? {
         let t = raw.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !t.isEmpty else { return nil }
@@ -273,37 +138,60 @@ enum OllamaToolCalling {
         return URL(string: "https://\(t)")
     }
 
-    private static func runTerminalDoScript(command: String) -> String {
-        let normalized = command
-            .replacingOccurrences(of: "\r\n", with: "\n")
-            .split(separator: "\n", omittingEmptySubsequences: true)
-            .joined(separator: "; ")
-        let inner = escapeForAppleScriptDoScriptString(normalized)
-        let script = """
-        tell application "Terminal"
-            activate
-            do script "\(inner)"
-        end tell
-        """
+    // MARK: - Shell execution (Suggestion 4: Process instead of AppleScript)
+
+    /// Runs a shell command via `/bin/zsh -c` using `Process`, captures stdout+stderr,
+    /// and returns the combined output to the model.
+    ///
+    /// This replaces the previous AppleScript `do script` approach which:
+    ///  - could not capture command output
+    ///  - relied on string interpolation inside AppleScript (injection surface)
+    ///  - opened a persistent Terminal window that blocked automated tests
+    private static func runShellCommand(_ command: String) -> String {
         let task = Process()
-        task.executableURL = URL(fileURLWithPath: "/usr/bin/osascript")
-        task.arguments = ["-e", script]
+        task.executableURL = URL(fileURLWithPath: "/bin/zsh")
+        task.arguments = ["-c", command]
+
+        let outPipe = Pipe()
         let errPipe = Pipe()
-        task.standardOutput = Pipe()
-        task.standardError = errPipe
+        task.standardOutput = outPipe
+        task.standardError  = errPipe
+
         do {
             try task.run()
-            task.waitUntilExit()
         } catch {
-            return "Error: could not start osascript: \(error.localizedDescription)"
+            return "Error: could not start zsh: \(error.localizedDescription)"
         }
-        let errData = errPipe.fileHandleForReading.readDataToEndOfFile()
-        let errStr = String(data: errData, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        if task.terminationStatus != 0 {
-            return "Error (AppleScript/Terminal): \(errStr.isEmpty ? "exit \(task.terminationStatus)" : errStr)"
+
+        // Cap reading to avoid blocking on huge output.
+        let maxBytes = 65_536
+        var outData = Data()
+        var errData = Data()
+
+        // Read in chunks to honour the byte cap.
+        let outHandle = outPipe.fileHandleForReading
+        let errHandle = errPipe.fileHandleForReading
+
+        task.waitUntilExit()
+
+        outData = outHandle.readDataToEndOfFile()
+        errData = errHandle.readDataToEndOfFile()
+
+        let stdout = String(data: outData.prefix(maxBytes), encoding: .utf8)??
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let stderr = String(data: errData.prefix(maxBytes), encoding: .utf8)??
+            .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+
+        let exitCode = task.terminationStatus
+        if exitCode != 0 {
+            let errPart = stderr.isEmpty ? "(no stderr)" : stderr
+            let outPart = stdout.isEmpty ? "" : "\nstdout: \(stdout)"
+            return "Error (exit \(exitCode)): \(errPart)\(outPart)"
         }
-        return "Command ran in Terminal."
+        return stdout.isEmpty ? "Command completed (no output)." : stdout
     }
+
+    // MARK: - Tool dispatcher
 
     private static func executeLocalTool(name: String, argumentsJSON: String) async throws -> String {
         if LocalToolStore.allToolIds.contains(name), !LocalToolStore.isEnabled(name) {
@@ -321,10 +209,11 @@ enum OllamaToolCalling {
         if name == "type_into_focused_field", !ToolSafetySettings.allowTypeIntoFocusedField {
             return "Error: type_into_focused_field is turned off in Settings → Dangerous tools."
         }
+
         switch name {
         case "copy_to_clipboard":
             guard let data = argumentsJSON.data(using: .utf8),
-                  let obj = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+                  let obj = try? JSONSerialization.jsonObject(with: data) as? [String: Any],
                   let text = obj["text"] as? String
             else {
                 return "Error: copy_to_clipboard requires valid JSON with text."
@@ -351,15 +240,16 @@ enum OllamaToolCalling {
             else {
                 return "Error: open_url requires a valid `url`."
             }
-            let browser = ((obj["browser"] as? String) ?? "default").trimmingCharacters(in: .whitespacesAndNewlines).lowercased()
+            let browser = ((obj["browser"] as? String) ?? "default")
+                .trimmingCharacters(in: .whitespacesAndNewlines)
+                .lowercased()
             return await MainActor.run {
                 if browser == "safari" {
                     let p = Process()
                     p.executableURL = URL(fileURLWithPath: "/usr/bin/open")
                     p.arguments = ["-a", "Safari", url.absoluteString]
                     do {
-                        try p.run()
-                        p.waitUntilExit()
+                        try p.run(); p.waitUntilExit()
                         return p.terminationStatus == 0
                             ? "Opened in Safari: \(url.absoluteString)"
                             : "Error: could not open with Safari."
@@ -390,12 +280,10 @@ enum OllamaToolCalling {
             comps.scheme = "whatsapp"
             comps.host = "send"
             comps.queryItems = items.isEmpty ? nil : items
-            guard let wurl = comps.url else {
-                return "Error: could not build WhatsApp URL."
-            }
+            guard let wurl = comps.url else { return "Error: could not build WhatsApp URL." }
             return await MainActor.run {
                 NSWorkspace.shared.open(wurl)
-                    ? "Opened WhatsApp (text/phone passed via URL; behavior varies by app version)."
+                    ? "Opened WhatsApp."
                     : "Error: could not open WhatsApp (installed?)."
             }
 
@@ -410,14 +298,16 @@ enum OllamaToolCalling {
             if cmd.count > 16_384 {
                 return "Error: command exceeds maximum length (16384 characters)."
             }
-            return await MainActor.run {
-                if ToolSafetySettings.askBeforeEachTerminalCommand,
-                   !ToolInvocationConfirmation.confirmTerminalCommand(cmd)
-                {
-                    return "User cancelled: terminal command was not run."
+            // Confirmation dialog (if enabled in Settings)
+            let confirmed = await MainActor.run {
+                if ToolSafetySettings.askBeforeEachTerminalCommand {
+                    return ToolInvocationConfirmation.confirmTerminalCommand(cmd)
                 }
-                return runTerminalDoScript(command: cmd)
+                return true
             }
+            guard confirmed else { return "User cancelled: terminal command was not run." }
+            // Run via zsh; return captured output (Suggestion 4)
+            return runShellCommand(cmd)
 
         case "type_into_focused_field":
             guard let data = argumentsJSON.data(using: .utf8),
@@ -431,8 +321,7 @@ enum OllamaToolCalling {
             }
             return await MainActor.run {
                 if ToolSafetySettings.askBeforeEachTypeIntoFocusedField,
-                   !ToolInvocationConfirmation.confirmTypeIntoFocusedField(text)
-                {
+                   !ToolInvocationConfirmation.confirmTypeIntoFocusedField(text) {
                     return "User cancelled: text was not inserted into the focused field."
                 }
                 let code = FocusedTextInsertion.insertText(text)
@@ -444,13 +333,15 @@ enum OllamaToolCalling {
         }
     }
 
+    // MARK: - open_application helpers
+
     private static func openApplicationResult(argumentsJSON: String) async -> String {
         guard let data = argumentsJSON.data(using: .utf8),
               let obj = try? JSONSerialization.jsonObject(with: data) as? [String: Any]
         else {
             return "Error: open_application requires valid JSON."
         }
-        let appName = (obj["name"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        let appName  = (obj["name"]      as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
         let bundleId = (obj["bundle_id"] as? String)?.trimmingCharacters(in: .whitespacesAndNewlines)
         if let bid = bundleId, !bid.isEmpty {
             guard let url = await MainActor.run(body: {
@@ -462,7 +353,7 @@ enum OllamaToolCalling {
         }
         if let n = appName, !n.isEmpty {
             guard let url = applicationURLForDisplayName(n) else {
-                return "Error: '\(n)' not found under /Applications or ~/Applications (try exact name or use bundle_id)."
+                return "Error: '\(n)' not found under /Applications or ~/Applications."
             }
             return await openApplicationAtURL(url, summary: n)
         }
@@ -472,21 +363,18 @@ enum OllamaToolCalling {
     private static func applicationURLForDisplayName(_ name: String) -> URL? {
         let candidates = [
             URL(fileURLWithPath: "/Applications/\(name).app"),
-            FileManager.default.homeDirectoryForCurrentUser.appendingPathComponent("Applications/\(name).app", isDirectory: true),
+            FileManager.default.homeDirectoryForCurrentUser
+                .appendingPathComponent("Applications/\(name).app", isDirectory: true),
         ]
-        for u in candidates where FileManager.default.fileExists(atPath: u.path) {
-            return u
-        }
-        return nil
+        return candidates.first { FileManager.default.fileExists(atPath: $0.path) }
     }
 
     private static func openApplicationAtURL(_ url: URL, summary: String) async -> String {
         if #available(macOS 11.0, *) {
             return await withCheckedContinuation { cont in
-                let config = NSWorkspace.OpenConfiguration()
-                NSWorkspace.shared.openApplication(at: url, configuration: config) { _, error in
+                NSWorkspace.shared.openApplication(at: url, configuration: .init()) { _, error in
                     if let error {
-                        cont.resume(returning: "Error: could not open application: \(error.localizedDescription)")
+                        cont.resume(returning: "Error: \(error.localizedDescription)")
                     } else {
                         cont.resume(returning: "Opened: \(summary).")
                     }
