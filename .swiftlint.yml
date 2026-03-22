@@ -1,0 +1,62 @@
+# SwiftLint configuration for RLeon
+# https://github.com/realm/SwiftLint
+
+included:
+  - RLeon
+
+excluded:
+  - RLeon.xcodeproj
+  - docs
+  - scripts
+
+# Rules
+disabled_rules:
+  - todo                    # TODOs are tracked in ROADMAP.md, not as warnings
+  - fixme
+  - trailing_whitespace     # handled by Xcode editor
+
+opt_in_rules:
+  - empty_count
+  - closure_spacing
+  - contains_over_first_not_nil
+  - explicit_init
+  - first_where
+  - joined_default_parameter
+  - overridden_super_call
+  - redundant_nil_coalescing
+  - sorted_imports
+  - toggle_bool
+  - unused_declaration
+  - vertical_parameter_alignment_on_call
+
+# Thresholds
+line_length:
+  warning: 140
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+
+file_length:
+  warning: 600
+  error: 1000
+
+function_body_length:
+  warning: 80
+  error: 150
+
+type_body_length:
+  warning: 400
+  error: 600
+
+nesting:
+  type_level:
+    warning: 2
+
+identifier_name:
+  min_length: 1   # allow single-char loop vars (e.g. `i`, `e`)
+  excluded:
+    - id
+    - ok
+    - fn
+    - tc
+    - ud
