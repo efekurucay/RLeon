@@ -10,6 +10,8 @@ Thanks for your interest in RLeon.
 
 Optional: [Ollama](https://ollama.com) on `http://127.0.0.1:11434` for LLM features.
 
+Optional: refresh README imagery with a **real** screen capture — build Release, then run **`scripts/capture_screenshot.sh`** (writes `docs/images/main-window-real.png`, ignored by git unless you rename and commit).
+
 ## MCP Swift SDK (optional / future)
 
 The official [modelcontextprotocol/swift-sdk](https://github.com/modelcontextprotocol/swift-sdk) targets **Swift 6.0+** and **Xcode 16+**. If you work on `MCPToolBridge`, use a compatible toolchain or keep changes behind clear `#if canImport(MCP)` gates until the project standardizes on Swift 6.

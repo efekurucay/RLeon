@@ -21,3 +21,6 @@ xcuserdata/
 .env
 *.pem
 
+# Local screenshot captures (optional)
+docs/images/main-window-real.png
+

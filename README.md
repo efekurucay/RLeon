@@ -24,6 +24,7 @@
 ## Table of contents
 
 - [About](#about)
+- [Screenshots](#screenshots)
 - [Features](#features)
 - [Requirements](#requirements)
 - [Getting started](#getting-started)
@@ -45,6 +46,16 @@
 - **Privacy by default:** speech and OCR run on-device; Ollama is typically `localhost` (you control the model).
 - **English UI** and default prompts.
 - **Safety-first:** high-risk tools (shell, typing into other apps) are **off by default** and gated in Settings.
+
+---
+
+## Screenshots
+
+<p align="center">
+  <img src="docs/images/main-window.jpg" width="720" alt="RLeon — illustrative UI preview (Speech, Vision OCR, Ollama)" />
+</p>
+
+<p align="center"><sub>Illustrative preview of the main window layout. For a real capture from your machine, build Release and run <code>scripts/capture_screenshot.sh</code> (saves <code>docs/images/main-window-real.png</code>).</sub></p>
 
 ---
 

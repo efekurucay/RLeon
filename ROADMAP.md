@@ -32,7 +32,7 @@ This document describes **what is already in place**, **what we plan next**, and
 | **macOS** | Target **14+**; Xcode **15+** for build. |
 | **CI** | GitHub Actions: `xcodebuild` Debug build on macOS runner (`.github/workflows/ci.yml`). |
 | **Community** | `CONTRIBUTING.md`, `SECURITY.md`, `CODE_OF_CONDUCT.md`, issue templates, PR template. |
-| **Docs** | Root README; technical deep-dive in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). |
+| **Docs** | Root README (with screenshots); technical deep-dive in [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md). |
 
 ### Recent repo / docs cleanup (already done)
 
@@ -50,8 +50,8 @@ Priorities that unlock the most users with limited scope creep.
 
 | Item | Rationale |
 | --- | --- |
-| **Screenshots / short demo** | README and social previews; lowers onboarding friction. |
-| **GitHub Releases** | Tagged builds; users know what to download. |
+| **Screenshots / short demo** | README includes an illustrative preview; `scripts/capture_screenshot.sh` for a real local capture (`main-window-real.png`, gitignored). |
+| **GitHub Releases** | **v0.1.0** tag + notes (source-first; optional signed `.app` later). |
 | **Verify CI on `main`** | After the first push, confirm Actions runs green and the README badge loads. |
 | **Optional notarization / signing notes** | Document or automate steps for distributing outside the Mac App Store. |
 
