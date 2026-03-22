@@ -1,0 +1,461 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA0000010000000000000020 /* RLeonApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000016 /* RLeonApp.swift */; };
+		AA0000010000000000000021 /* LocalToolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000017 /* LocalToolStore.swift */; };
+		AA0000010000000000000022 /* RLeonTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000018 /* RLeonTheme.swift */; };
+		AA0000010000000000000023 /* ToolSelectionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000019 /* ToolSelectionStore.swift */; };
+		AA0000010000000000000031 /* ToolRegistryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000025 /* ToolRegistryModels.swift */; };
+		AA0000010000000000000032 /* ToolManagementViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000026 /* ToolManagementViews.swift */; };
+		AA0000010000000000000033 /* MCPToolBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000027 /* MCPToolBridge.swift */; };
+		AA0000010000000000000002 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000002 /* ContentView.swift */; };
+		AA0000010000000000000003 /* SpeechTranscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000003 /* SpeechTranscriber.swift */; };
+		AA0000010000000000000004 /* VisionOCR.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000004 /* VisionOCR.swift */; };
+		AA0000010000000000000005 /* OllamaClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000006 /* OllamaClient.swift */; };
+		AA0000010000000000000006 /* OllamaChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000007 /* OllamaChatView.swift */; };
+		AA0000010000000000000007 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000011 /* AppState.swift */; };
+		AA0000010000000000000008 /* MainDisplayCapture.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000012 /* MainDisplayCapture.swift */; };
+		AA0000010000000000000009 /* FnPushToTalkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000013 /* FnPushToTalkCoordinator.swift */; };
+		AA0000010000000000000010 /* OllamaToolCalling.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000014 /* OllamaToolCalling.swift */; };
+		AA0000010000000000000011 /* FocusedTextInsertion.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000015 /* FocusedTextInsertion.swift */; };
+		AA0000010000000000000030 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000024 /* Assets.xcassets */; };
+		AA0000010000000000000034 /* ToolSafetySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000028 /* ToolSafetySettings.swift */; };
+		AA0000010000000000000035 /* DangerousToolsSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		AA0000020000000000000016 /* RLeonApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLeonApp.swift; sourceTree = "<group>"; };
+		AA0000020000000000000017 /* LocalToolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalToolStore.swift; sourceTree = "<group>"; };
+		AA0000020000000000000018 /* RLeonTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RLeonTheme.swift; sourceTree = "<group>"; };
+		AA0000020000000000000019 /* ToolSelectionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSelectionStore.swift; sourceTree = "<group>"; };
+		AA0000020000000000000025 /* ToolRegistryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolRegistryModels.swift; sourceTree = "<group>"; };
+		AA0000020000000000000026 /* ToolManagementViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolManagementViews.swift; sourceTree = "<group>"; };
+		AA0000020000000000000027 /* MCPToolBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPToolBridge.swift; sourceTree = "<group>"; };
+		AA0000020000000000000002 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA0000020000000000000003 /* SpeechTranscriber.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechTranscriber.swift; sourceTree = "<group>"; };
+		AA0000020000000000000004 /* VisionOCR.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisionOCR.swift; sourceTree = "<group>"; };
+		AA0000020000000000000005 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA0000020000000000000006 /* OllamaClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaClient.swift; sourceTree = "<group>"; };
+		AA0000020000000000000007 /* OllamaChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaChatView.swift; sourceTree = "<group>"; };
+		AA0000020000000000000011 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		AA0000020000000000000012 /* MainDisplayCapture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDisplayCapture.swift; sourceTree = "<group>"; };
+		AA0000020000000000000013 /* FnPushToTalkCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FnPushToTalkCoordinator.swift; sourceTree = "<group>"; };
+		AA0000020000000000000014 /* OllamaToolCalling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaToolCalling.swift; sourceTree = "<group>"; };
+		AA0000020000000000000015 /* FocusedTextInsertion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusedTextInsertion.swift; sourceTree = "<group>"; };
+		AA0000020000000000000024 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA0000020000000000000028 /* ToolSafetySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSafetySettings.swift; sourceTree = "<group>"; };
+		AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerousToolsSettingsSection.swift; sourceTree = "<group>"; };
+		AA0000030000000000000001 /* RLeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RLeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA0000040000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA0000050000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				AA0000050000000000000002 /* SwiftSpeechVisionDemo */,
+				AA0000050000000000000003 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA0000050000000000000002 /* SwiftSpeechVisionDemo */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000050000000000000004 /* App */,
+				AA0000050000000000000005 /* UI */,
+				AA0000050000000000000006 /* LLM */,
+				AA0000050000000000000007 /* Speech */,
+				AA0000050000000000000008 /* OCR */,
+				AA0000050000000000000009 /* System */,
+				AA000005000000000000000A /* Tools */,
+				AA000005000000000000000B /* Resources */,
+			);
+			path = SwiftSpeechVisionDemo;
+			sourceTree = "<group>";
+		};
+		AA0000050000000000000004 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000016 /* RLeonApp.swift */,
+				AA0000020000000000000011 /* AppState.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		AA0000050000000000000005 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000002 /* ContentView.swift */,
+				AA0000020000000000000018 /* RLeonTheme.swift */,
+				AA0000020000000000000026 /* ToolManagementViews.swift */,
+				AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		AA0000050000000000000006 /* LLM */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000006 /* OllamaClient.swift */,
+				AA0000020000000000000007 /* OllamaChatView.swift */,
+				AA0000020000000000000014 /* OllamaToolCalling.swift */,
+			);
+			path = LLM;
+			sourceTree = "<group>";
+		};
+		AA0000050000000000000007 /* Speech */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000003 /* SpeechTranscriber.swift */,
+			);
+			path = Speech;
+			sourceTree = "<group>";
+		};
+		AA0000050000000000000008 /* OCR */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000004 /* VisionOCR.swift */,
+				AA0000020000000000000012 /* MainDisplayCapture.swift */,
+			);
+			path = OCR;
+			sourceTree = "<group>";
+		};
+		AA0000050000000000000009 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000013 /* FnPushToTalkCoordinator.swift */,
+				AA0000020000000000000015 /* FocusedTextInsertion.swift */,
+			);
+			path = System;
+			sourceTree = "<group>";
+		};
+		AA000005000000000000000A /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000017 /* LocalToolStore.swift */,
+				AA0000020000000000000019 /* ToolSelectionStore.swift */,
+				AA0000020000000000000025 /* ToolRegistryModels.swift */,
+				AA0000020000000000000027 /* MCPToolBridge.swift */,
+				AA0000020000000000000028 /* ToolSafetySettings.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
+		AA000005000000000000000B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000020000000000000005 /* Info.plist */,
+				AA0000020000000000000024 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AA0000050000000000000003 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA0000030000000000000001 /* RLeon.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA0000060000000000000001 /* RLeon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA0000070000000000000001 /* Build configuration list for PBXNativeTarget "RLeon" */;
+			buildPhases = (
+				AA0000080000000000000001 /* Sources */,
+				AA0000040000000000000001 /* Frameworks */,
+				AA00000C0000000000000001 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RLeon;
+			productName = RLeon;
+			productReference = AA0000030000000000000001 /* RLeon.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA0000090000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					AA0000060000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = AA0000070000000000000002 /* Build configuration list for PBXProject "SwiftSpeechVisionDemo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA0000050000000000000001;
+			productRefGroup = AA0000050000000000000003 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA0000060000000000000001 /* RLeon */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA0000080000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000010000000000000020 /* RLeonApp.swift in Sources */,
+				AA0000010000000000000021 /* LocalToolStore.swift in Sources */,
+				AA0000010000000000000022 /* RLeonTheme.swift in Sources */,
+				AA0000010000000000000023 /* ToolSelectionStore.swift in Sources */,
+				AA0000010000000000000031 /* ToolRegistryModels.swift in Sources */,
+				AA0000010000000000000032 /* ToolManagementViews.swift in Sources */,
+				AA0000010000000000000033 /* MCPToolBridge.swift in Sources */,
+				AA0000010000000000000002 /* ContentView.swift in Sources */,
+				AA0000010000000000000003 /* SpeechTranscriber.swift in Sources */,
+				AA0000010000000000000004 /* VisionOCR.swift in Sources */,
+				AA0000010000000000000005 /* OllamaClient.swift in Sources */,
+				AA0000010000000000000006 /* OllamaChatView.swift in Sources */,
+				AA0000010000000000000007 /* AppState.swift in Sources */,
+				AA0000010000000000000008 /* MainDisplayCapture.swift in Sources */,
+				AA0000010000000000000009 /* FnPushToTalkCoordinator.swift in Sources */,
+				AA0000010000000000000010 /* OllamaToolCalling.swift in Sources */,
+				AA0000010000000000000011 /* FocusedTextInsertion.swift in Sources */,
+				AA0000010000000000000034 /* ToolSafetySettings.swift in Sources */,
+				AA0000010000000000000035 /* DangerousToolsSettingsSection.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA00000C0000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA0000010000000000000030 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		AA00000A0000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA00000A0000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		AA00000A0000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SwiftSpeechVisionDemo/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rleon.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AA00000A0000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = SwiftSpeechVisionDemo/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.rleon.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA0000070000000000000001 /* Build configuration list for PBXNativeTarget "RLeon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA00000A0000000000000003 /* Debug */,
+				AA00000A0000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA0000070000000000000002 /* Build configuration list for PBXProject "SwiftSpeechVisionDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA00000A0000000000000001 /* Debug */,
+				AA00000A0000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = AA0000090000000000000001 /* Project object */;
+}
