@@ -3,6 +3,8 @@ import SwiftUI
 struct DangerousToolsSettingsSection: View {
     @AppStorage(ToolSafetySettings.allowRunTerminalCommandKey) private var allowTerminal = false
     @AppStorage(ToolSafetySettings.allowTypeIntoFocusedFieldKey) private var allowTyping = false
+    @AppStorage(ToolSafetySettings.askBeforeEachTerminalCommandKey) private var askBeforeTerminal = true
+    @AppStorage(ToolSafetySettings.askBeforeEachTypeIntoFocusedFieldKey) private var askBeforeTyping = true
     @AppStorage("rleonMCPBridgeEnabled") private var mcpBridge = false
 
     @State private var confirmTerminal = false
@@ -23,6 +25,19 @@ struct DangerousToolsSettingsSection: View {
             }
             .tint(RLeonTheme.accent)
 
+            if allowTerminal {
+                Toggle(isOn: $askBeforeTerminal) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Ask before each Terminal command")
+                            .font(.subheadline.weight(.medium))
+                        Text("Shows the exact command in a dialog; turn off only if you fully trust the model.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .tint(RLeonTheme.accent)
+            }
+
             Toggle(isOn: typingToggle) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("Type into focused field (`type_into_focused_field`)")
@@ -33,6 +48,19 @@ struct DangerousToolsSettingsSection: View {
                 }
             }
             .tint(RLeonTheme.accent)
+
+            if allowTyping {
+                Toggle(isOn: $askBeforeTyping) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Ask before each insertion into another app")
+                            .font(.subheadline.weight(.medium))
+                        Text("Confirms the text before it is typed into the focused field.")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .tint(RLeonTheme.accent)
+            }
 
             Divider().padding(.vertical, 4)
 

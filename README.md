@@ -111,7 +111,7 @@ Typical output path:
 | --- | --- |
 | **Ollama** | Run `ollama serve`; in the app, set base URL (default `http://127.0.0.1:11434`) and model name. |
 | **Tool calling** | Enable in the LLM panel; configure which tools are listed under **Settings → Local tools**. |
-| **Dangerous tools** | Under **Settings → Dangerous tools & MCP**, explicitly allow **Terminal** and/or **type into focused field** if you need them; they stay **off** until you confirm. |
+| **Dangerous tools** | Under **Settings → Dangerous tools & MCP**, allow **Terminal** and/or **type into focused field** (off until you confirm once). **Each** shell command and insertion can show an extra **Run** / **Type** dialog (default on; can be disabled there for trusted setups only). |
 | **MCP (`mcp_*`)** | Experimental toggle in the same section; full [swift-sdk](https://github.com/modelcontextprotocol/swift-sdk) wiring is still in progress. |
 
 ---
@@ -130,7 +130,7 @@ Tools are sent to Ollama as OpenAI-compatible `function` definitions when enable
 | `run_terminal_command` | Run shell in a new Terminal window | **High** |
 | `type_into_focused_field` | Type into focused UI via Accessibility / events | **High** |
 
-**Dangerous tools** (`run_terminal_command`, `type_into_focused_field`) are **not** visible to the model until you enable them under **Settings → Dangerous tools & MCP** (with confirmation). You still enable each tool in **Local tools** if you want it in the list.
+**Dangerous tools** (`run_terminal_command`, `type_into_focused_field`) are **not** visible to the model until you enable them under **Settings → Dangerous tools & MCP** (with confirmation). You still enable each tool in **Local tools** if you want it in the list. When a dangerous tool runs, **Terminal** shows the exact command in a modal (unless you turn off “ask before each”); **typing** can likewise ask before inserting into another app.
 
 ---
 
@@ -144,7 +144,7 @@ Tools are sent to Ollama as OpenAI-compatible `function` definitions when enable
 
 ## Roadmap
 
-High level: **releases & trust** (screenshots, GitHub Releases, signing docs), **safety** (per-command confirmation, stronger validation), **quality** (tests, CI hardening), then **full MCP** (swift-sdk, stdio/HTTP transport, “Add MCP server” in Settings).
+High level: **releases & trust** (screenshots, GitHub Releases, [notarization notes](docs/NOTARIZATION.md)), **safety** (per-call confirmation for Terminal/typing, length limits), **quality** (tests, CI hardening), then **full MCP** (swift-sdk, “Add MCP server” in Settings).
 
 The **detailed, maintained plan** — what’s done, what’s next, priorities — lives in **[ROADMAP.md](ROADMAP.md)**.
 
@@ -158,6 +158,7 @@ The **detailed, maintained plan** — what’s done, what’s next, priorities �
 | [SECURITY.md](SECURITY.md) | Vulnerability reporting, threat model |
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community expectations |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | Data flow and key components |
+| [docs/NOTARIZATION.md](docs/NOTARIZATION.md) | Optional: signing & notarization for distributing `.app` |
 | [ROADMAP.md](ROADMAP.md) | Done vs planned work, near/mid/long term |
 
 ---

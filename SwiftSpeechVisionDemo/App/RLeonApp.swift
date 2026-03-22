@@ -78,6 +78,10 @@ struct RLeonApp: App {
                 .environmentObject(appState.toolSelection)
                 .tint(RLeonTheme.accent)
                 .onAppear {
+                    UserDefaults.standard.register(defaults: [
+                        ToolSafetySettings.askBeforeEachTerminalCommandKey: true,
+                        ToolSafetySettings.askBeforeEachTypeIntoFocusedFieldKey: true,
+                    ])
                     FocusedTextInsertion.requestAccessibilityPromptIfNeeded()
                     appState.fnCoordinator.startMonitoring()
                 }

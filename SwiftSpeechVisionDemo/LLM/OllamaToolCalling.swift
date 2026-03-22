@@ -307,10 +307,10 @@ enum OllamaToolCalling {
 
     private static func executeLocalTool(name: String, argumentsJSON: String) async throws -> String {
         if LocalToolStore.allToolIds.contains(name), !LocalToolStore.isEnabled(name) {
-            return "TOOL_DISABLED"
+            return "Error: tool \"\(name)\" is disabled in Settings → Local tools."
         }
         if name.hasPrefix("mcp_"), !MCPToolBridge.shared.isEnabled {
-            return "TOOL_DISABLED"
+            return "Error: MCP bridge is off in Settings → Dangerous tools & MCP."
         }
         if let mcpResult = await MCPToolBridge.shared.executeIfNeeded(name: name, argumentsJSON: argumentsJSON) {
             return mcpResult
@@ -407,8 +407,16 @@ enum OllamaToolCalling {
             else {
                 return "Error: run_terminal_command requires a non-empty `command`."
             }
+            if cmd.count > 16_384 {
+                return "Error: command exceeds maximum length (16384 characters)."
+            }
             return await MainActor.run {
-                runTerminalDoScript(command: cmd)
+                if ToolSafetySettings.askBeforeEachTerminalCommand,
+                   !ToolInvocationConfirmation.confirmTerminalCommand(cmd)
+                {
+                    return "User cancelled: terminal command was not run."
+                }
+                return runTerminalDoScript(command: cmd)
             }
 
         case "type_into_focused_field":
@@ -418,8 +426,17 @@ enum OllamaToolCalling {
             else {
                 return "Error: type_into_focused_field requires `text`."
             }
+            if text.count > 50_000 {
+                return "Error: text exceeds maximum length (50000 characters)."
+            }
             return await MainActor.run {
-                FocusedTextInsertion.insertText(text)
+                if ToolSafetySettings.askBeforeEachTypeIntoFocusedField,
+                   !ToolInvocationConfirmation.confirmTypeIntoFocusedField(text)
+                {
+                    return "User cancelled: text was not inserted into the focused field."
+                }
+                let code = FocusedTextInsertion.insertText(text)
+                return FocusedTextInsertion.localizedUserMessage(for: code)
             }
 
         default:

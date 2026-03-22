@@ -27,6 +27,7 @@
 		AA0000010000000000000030 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000024 /* Assets.xcassets */; };
 		AA0000010000000000000034 /* ToolSafetySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000028 /* ToolSafetySettings.swift */; };
 		AA0000010000000000000035 /* DangerousToolsSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */; };
+		AA0000010000000000000036 /* ToolInvocationConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000030 /* ToolInvocationConfirmation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +52,7 @@
 		AA0000020000000000000024 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA0000020000000000000028 /* ToolSafetySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSafetySettings.swift; sourceTree = "<group>"; };
 		AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerousToolsSettingsSection.swift; sourceTree = "<group>"; };
+		AA0000020000000000000030 /* ToolInvocationConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolInvocationConfirmation.swift; sourceTree = "<group>"; };
 		AA0000030000000000000001 /* RLeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RLeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -152,6 +154,7 @@
 				AA0000020000000000000025 /* ToolRegistryModels.swift */,
 				AA0000020000000000000027 /* MCPToolBridge.swift */,
 				AA0000020000000000000028 /* ToolSafetySettings.swift */,
+				AA0000020000000000000030 /* ToolInvocationConfirmation.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 				AA0000010000000000000011 /* FocusedTextInsertion.swift in Sources */,
 				AA0000010000000000000034 /* ToolSafetySettings.swift in Sources */,
 				AA0000010000000000000035 /* DangerousToolsSettingsSection.swift in Sources */,
+				AA0000010000000000000036 /* ToolInvocationConfirmation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

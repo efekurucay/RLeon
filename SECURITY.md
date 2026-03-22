@@ -21,10 +21,10 @@ High-impact areas:
 
 | Area | Risk |
 |------|------|
-| **`run_terminal_command`** | Runs shell commands in a new Terminal window via AppleScript. Treat as **arbitrary code execution** with user privileges. **Disabled by default**; enable only under Settings → Dangerous tools. |
-| **`type_into_focused_field`** | Types into the frontmost app using Accessibility / synthetic events. Can modify data in other applications. **Disabled by default**; enable only under Settings → Dangerous tools. |
+| **`run_terminal_command`** | Runs shell commands in a new Terminal window via AppleScript. Treat as **arbitrary code execution** with user privileges. **Disabled by default**; when enabled, each run shows a **confirmation dialog** with the command unless you opt out in Settings. |
+| **`type_into_focused_field`** | Types into the frontmost app using Accessibility / synthetic events. Can modify data in other applications. **Disabled by default**; when enabled, each insertion can require **confirmation** (default on). |
 | **MCP (`mcp_*` tools)** | Untrusted MCP servers can expose tools that read files, use the network, or perform other side effects. Only connect servers you trust. |
-| **Tool calling** | The local model chooses when to invoke tools. Prompt injection (e.g. via OCR text) could influence tool selection—validate arguments and prefer explicit user consent for dangerous operations (see roadmap). |
+| **Tool calling** | The local model chooses when to invoke tools. Prompt injection (e.g. via OCR text) could influence tool selection—dangerous tools use **explicit prompts** plus optional per-call confirmation. |
 
 ## Recommendations
 

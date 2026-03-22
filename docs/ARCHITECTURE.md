@@ -21,7 +21,7 @@ High-level data flow (local-first).
 
 Implemented in `OllamaToolCalling.executeLocalTool` and registered via `LocalToolStore`. User-facing order and enablement live in `ToolSelectionStore` / `ToolRegistryModels`.
 
-**Safety:** `ToolSafetySettings` gates `run_terminal_command` and `type_into_focused_field` (default **off**). Tools are omitted from the Ollama `tools` payload until allowed in **Settings → Dangerous tools & MCP**, in addition to per-tool enablement in the local tools list.
+**Safety:** `ToolSafetySettings` gates `run_terminal_command` and `type_into_focused_field` (default **off**). Tools are omitted from the Ollama `tools` payload until allowed in **Settings → Dangerous tools & MCP**, in addition to per-tool enablement in the local tools list. When enabled, **`ToolInvocationConfirmation`** (modal `NSAlert`) can require approval for **each** command or insertion (defaults on; user-configurable).
 
 ## FN push-to-talk
 

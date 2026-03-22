@@ -53,15 +53,15 @@ Priorities that unlock the most users with limited scope creep.
 | **Screenshots / short demo** | README includes an illustrative preview; `scripts/capture_screenshot.sh` for a real local capture (`main-window-real.png`, gitignored). |
 | **GitHub Releases** | **v0.1.0** tag + notes (source-first; optional signed `.app` later). |
 | **Verify CI on `main`** | After the first push, confirm Actions runs green and the README badge loads. |
-| **Optional notarization / signing notes** | Document or automate steps for distributing outside the Mac App Store. |
+| **Optional notarization / signing notes** | [`docs/NOTARIZATION.md`](docs/NOTARIZATION.md) — expand when CI produces signed builds. |
 
 ### 2. Safety & control (high impact)
 
 | Item | Rationale |
 | --- | --- |
-| **Per-invocation confirmation** for `run_terminal_command` (and optionally typing) | User approves each command string before execution, not only a global toggle. |
-| **Stronger validation** of tool arguments | Reduce accidental or model-induced destructive calls (length limits, denylists, quoting rules). |
-| **Clearer UX copy** when a tool is blocked | Why it failed (safety vs disabled vs permission). |
+| **Per-invocation confirmation** | **Shipped:** modal for each `run_terminal_command` and `type_into_focused_field` (defaults on; optional opt-out in Settings). |
+| **Stronger validation** | **Partial:** max length for shell command (16k) and typed text (50k); further denylists TBD. |
+| **Clearer UX copy** | **Partial:** disabled tools / MCP off / user cancel / type insertion now return readable strings. |
 
 ### 3. Quality
 
