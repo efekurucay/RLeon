@@ -177,9 +177,9 @@ enum OllamaToolCalling {
         outData = outHandle.readDataToEndOfFile()
         errData = errHandle.readDataToEndOfFile()
 
-        let stdout = String(data: outData.prefix(maxBytes), encoding: .utf8)??
+        let stdout = String(data: outData.prefix(maxBytes), encoding: .utf8)?
             .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        let stderr = String(data: errData.prefix(maxBytes), encoding: .utf8)??
+        let stderr = String(data: errData.prefix(maxBytes), encoding: .utf8)?
             .trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
 
         let exitCode = task.terminationStatus

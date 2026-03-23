@@ -28,6 +28,17 @@
 		AA0000010000000000000034 /* ToolSafetySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000028 /* ToolSafetySettings.swift */; };
 		AA0000010000000000000035 /* DangerousToolsSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */; };
 		AA0000010000000000000036 /* ToolInvocationConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000030 /* ToolInvocationConfirmation.swift */; };
+		AA0000010000000000000037 /* GeminiBatchAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000031 /* GeminiBatchAPIClient.swift */; };
+		AA0000010000000000000038 /* MediaBatchToolStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000032 /* MediaBatchToolStore.swift */; };
+			AA0000010000000000000039 /* MediaBatchToolView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000033 /* MediaBatchToolView.swift */; };
+			AA0000010000000000000040 /* AppEnvironmentStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000034 /* AppEnvironmentStore.swift */; };
+			AA0000010000000000000041 /* EnvironmentVariablesSettingsSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000035 /* EnvironmentVariablesSettingsSection.swift */; };
+			AA0000010000000000000042 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000036 /* AppSettings.swift */; };
+			AA0000010000000000000043 /* HotkeySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000037 /* HotkeySettingsView.swift */; };
+			AA0000010000000000000044 /* MCPSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000038 /* MCPSettingsView.swift */; };
+			AA0000010000000000000045 /* HotkeySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000039 /* HotkeySettings.swift */; };
+			AA0000010000000000000046 /* OllamaStreamClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000040 /* OllamaStreamClient.swift */; };
+			AA0000010000000000000047 /* ToolDefinitionModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0000020000000000000041 /* ToolDefinitionModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +64,17 @@
 		AA0000020000000000000028 /* ToolSafetySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSafetySettings.swift; sourceTree = "<group>"; };
 		AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerousToolsSettingsSection.swift; sourceTree = "<group>"; };
 		AA0000020000000000000030 /* ToolInvocationConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolInvocationConfirmation.swift; sourceTree = "<group>"; };
+		AA0000020000000000000031 /* GeminiBatchAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeminiBatchAPIClient.swift; sourceTree = "<group>"; };
+		AA0000020000000000000032 /* MediaBatchToolStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaBatchToolStore.swift; sourceTree = "<group>"; };
+			AA0000020000000000000033 /* MediaBatchToolView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaBatchToolView.swift; sourceTree = "<group>"; };
+			AA0000020000000000000034 /* AppEnvironmentStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironmentStore.swift; sourceTree = "<group>"; };
+			AA0000020000000000000035 /* EnvironmentVariablesSettingsSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariablesSettingsSection.swift; sourceTree = "<group>"; };
+			AA0000020000000000000036 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+			AA0000020000000000000037 /* HotkeySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeySettingsView.swift; sourceTree = "<group>"; };
+			AA0000020000000000000038 /* MCPSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MCPSettingsView.swift; sourceTree = "<group>"; };
+			AA0000020000000000000039 /* HotkeySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeySettings.swift; sourceTree = "<group>"; };
+			AA0000020000000000000040 /* OllamaStreamClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OllamaStreamClient.swift; sourceTree = "<group>"; };
+			AA0000020000000000000041 /* ToolDefinitionModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolDefinitionModels.swift; sourceTree = "<group>"; };
 		AA0000030000000000000001 /* RLeon.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RLeon.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -90,35 +112,41 @@
 			path = RLeon;
 			sourceTree = "<group>";
 		};
-		AA0000050000000000000004 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				AA0000020000000000000016 /* RLeonApp.swift */,
-				AA0000020000000000000011 /* AppState.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
+			AA0000050000000000000004 /* App */ = {
+				isa = PBXGroup;
+				children = (
+					AA0000020000000000000016 /* RLeonApp.swift */,
+					AA0000020000000000000036 /* AppSettings.swift */,
+					AA0000020000000000000011 /* AppState.swift */,
+				);
+				path = App;
+				sourceTree = "<group>";
 		};
-		AA0000050000000000000005 /* UI */ = {
-			isa = PBXGroup;
-			children = (
-				AA0000020000000000000002 /* ContentView.swift */,
-				AA0000020000000000000018 /* RLeonTheme.swift */,
-				AA0000020000000000000026 /* ToolManagementViews.swift */,
-				AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */,
-			);
-			path = UI;
-			sourceTree = "<group>";
+			AA0000050000000000000005 /* UI */ = {
+				isa = PBXGroup;
+				children = (
+					AA0000020000000000000002 /* ContentView.swift */,
+					AA0000020000000000000018 /* RLeonTheme.swift */,
+					AA0000020000000000000026 /* ToolManagementViews.swift */,
+					AA0000020000000000000029 /* DangerousToolsSettingsSection.swift */,
+					AA0000020000000000000033 /* MediaBatchToolView.swift */,
+					AA0000020000000000000035 /* EnvironmentVariablesSettingsSection.swift */,
+					AA0000020000000000000037 /* HotkeySettingsView.swift */,
+					AA0000020000000000000038 /* MCPSettingsView.swift */,
+				);
+				path = UI;
+				sourceTree = "<group>";
 		};
-		AA0000050000000000000006 /* LLM */ = {
-			isa = PBXGroup;
-			children = (
-				AA0000020000000000000006 /* OllamaClient.swift */,
-				AA0000020000000000000007 /* OllamaChatView.swift */,
-				AA0000020000000000000014 /* OllamaToolCalling.swift */,
-			);
-			path = LLM;
-			sourceTree = "<group>";
+			AA0000050000000000000006 /* LLM */ = {
+				isa = PBXGroup;
+				children = (
+					AA0000020000000000000006 /* OllamaClient.swift */,
+					AA0000020000000000000007 /* OllamaChatView.swift */,
+					AA0000020000000000000040 /* OllamaStreamClient.swift */,
+					AA0000020000000000000014 /* OllamaToolCalling.swift */,
+				);
+				path = LLM;
+				sourceTree = "<group>";
 		};
 		AA0000050000000000000007 /* Speech */ = {
 			isa = PBXGroup;
@@ -137,14 +165,15 @@
 			path = OCR;
 			sourceTree = "<group>";
 		};
-		AA0000050000000000000009 /* System */ = {
-			isa = PBXGroup;
-			children = (
-				AA0000020000000000000013 /* FnPushToTalkCoordinator.swift */,
-				AA0000020000000000000015 /* FocusedTextInsertion.swift */,
-			);
-			path = System;
-			sourceTree = "<group>";
+			AA0000050000000000000009 /* System */ = {
+				isa = PBXGroup;
+				children = (
+					AA0000020000000000000013 /* FnPushToTalkCoordinator.swift */,
+					AA0000020000000000000015 /* FocusedTextInsertion.swift */,
+					AA0000020000000000000039 /* HotkeySettings.swift */,
+				);
+				path = System;
+				sourceTree = "<group>";
 		};
 		AA000005000000000000000A /* Tools */ = {
 			isa = PBXGroup;
@@ -153,8 +182,12 @@
 				AA0000020000000000000019 /* ToolSelectionStore.swift */,
 				AA0000020000000000000025 /* ToolRegistryModels.swift */,
 				AA0000020000000000000027 /* MCPToolBridge.swift */,
-				AA0000020000000000000028 /* ToolSafetySettings.swift */,
-				AA0000020000000000000030 /* ToolInvocationConfirmation.swift */,
+					AA0000020000000000000028 /* ToolSafetySettings.swift */,
+					AA0000020000000000000030 /* ToolInvocationConfirmation.swift */,
+					AA0000020000000000000041 /* ToolDefinitionModels.swift */,
+					AA0000020000000000000031 /* GeminiBatchAPIClient.swift */,
+					AA0000020000000000000032 /* MediaBatchToolStore.swift */,
+					AA0000020000000000000034 /* AppEnvironmentStore.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";
@@ -233,28 +266,39 @@
 		AA0000080000000000000001 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
-			files = (
-				AA0000010000000000000020 /* RLeonApp.swift in Sources */,
-				AA0000010000000000000021 /* LocalToolStore.swift in Sources */,
-				AA0000010000000000000022 /* RLeonTheme.swift in Sources */,
-				AA0000010000000000000023 /* ToolSelectionStore.swift in Sources */,
-				AA0000010000000000000031 /* ToolRegistryModels.swift in Sources */,
-				AA0000010000000000000032 /* ToolManagementViews.swift in Sources */,
+				files = (
+					AA0000010000000000000020 /* RLeonApp.swift in Sources */,
+					AA0000010000000000000042 /* AppSettings.swift in Sources */,
+					AA0000010000000000000021 /* LocalToolStore.swift in Sources */,
+					AA0000010000000000000022 /* RLeonTheme.swift in Sources */,
+					AA0000010000000000000023 /* ToolSelectionStore.swift in Sources */,
+					AA0000010000000000000031 /* ToolRegistryModels.swift in Sources */,
+					AA0000010000000000000032 /* ToolManagementViews.swift in Sources */,
 				AA0000010000000000000033 /* MCPToolBridge.swift in Sources */,
 				AA0000010000000000000002 /* ContentView.swift in Sources */,
 				AA0000010000000000000003 /* SpeechTranscriber.swift in Sources */,
 				AA0000010000000000000004 /* VisionOCR.swift in Sources */,
-				AA0000010000000000000005 /* OllamaClient.swift in Sources */,
-				AA0000010000000000000006 /* OllamaChatView.swift in Sources */,
-				AA0000010000000000000007 /* AppState.swift in Sources */,
+					AA0000010000000000000005 /* OllamaClient.swift in Sources */,
+					AA0000010000000000000006 /* OllamaChatView.swift in Sources */,
+					AA0000010000000000000046 /* OllamaStreamClient.swift in Sources */,
+					AA0000010000000000000007 /* AppState.swift in Sources */,
 				AA0000010000000000000008 /* MainDisplayCapture.swift in Sources */,
 				AA0000010000000000000009 /* FnPushToTalkCoordinator.swift in Sources */,
 				AA0000010000000000000010 /* OllamaToolCalling.swift in Sources */,
 				AA0000010000000000000011 /* FocusedTextInsertion.swift in Sources */,
-				AA0000010000000000000034 /* ToolSafetySettings.swift in Sources */,
-				AA0000010000000000000035 /* DangerousToolsSettingsSection.swift in Sources */,
-				AA0000010000000000000036 /* ToolInvocationConfirmation.swift in Sources */,
-			);
+					AA0000010000000000000034 /* ToolSafetySettings.swift in Sources */,
+					AA0000010000000000000035 /* DangerousToolsSettingsSection.swift in Sources */,
+					AA0000010000000000000036 /* ToolInvocationConfirmation.swift in Sources */,
+					AA0000010000000000000047 /* ToolDefinitionModels.swift in Sources */,
+					AA0000010000000000000037 /* GeminiBatchAPIClient.swift in Sources */,
+					AA0000010000000000000038 /* MediaBatchToolStore.swift in Sources */,
+					AA0000010000000000000039 /* MediaBatchToolView.swift in Sources */,
+					AA0000010000000000000040 /* AppEnvironmentStore.swift in Sources */,
+					AA0000010000000000000041 /* EnvironmentVariablesSettingsSection.swift in Sources */,
+					AA0000010000000000000043 /* HotkeySettingsView.swift in Sources */,
+					AA0000010000000000000044 /* MCPSettingsView.swift in Sources */,
+					AA0000010000000000000045 /* HotkeySettings.swift in Sources */,
+				);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */

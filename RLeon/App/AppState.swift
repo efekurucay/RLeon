@@ -9,6 +9,8 @@ final class AppState: ObservableObject {
     let speech: SpeechTranscriber
     let fnCoordinator: FnPushToTalkCoordinator
     let toolSelection: ToolSelectionStore
+    let mediaBatchTool: MediaBatchToolStore
+    let appEnvironment: AppEnvironmentStore
 
     init() {
         let s = SpeechTranscriber()
@@ -17,5 +19,7 @@ final class AppState: ObservableObject {
         speech       = s
         fnCoordinator = FnPushToTalkCoordinator(speech: s)
         toolSelection = ToolSelectionStore()
+        mediaBatchTool = MediaBatchToolStore()
+        appEnvironment = AppEnvironmentStore()
     }
 }
